@@ -41,21 +41,29 @@ public class lucka_12 extends Losning {
     public void setInput(String input) {
         super.setInput(input);
         cg = new CharGrid(input);
+
     }
 
-    public String svar() {
+    protected void ackumulera() {
         int px = 0;
+        int[] carea;
 
         while (px < inputSize) {
             if(!isContained(px)) {
-                regioner.add(regionAt(px));
+                carea = regionAreaAt(px);
+                regioner.add(new Region(carea, Arrays.stream(carea).map(this::addAtIx).sum()));
             }
             ++px;
         }
+    }
+
+    public String svar() {
+        ackumulera();
+
         return String.valueOf(regioner.stream().mapToInt(r -> r.area.length * r.perim).sum());
     }
 
-    Region regionAt(int p) {
+    int[] regionAreaAt(int p) {
         // todo: bryt ut dfs? (upprepning lucka 10)
         int cur, k, perim = 0;
         Point mpoint = new Point(-1, -1), npoint = new Point(-1, -1);
@@ -83,10 +91,6 @@ public class lucka_12 extends Losning {
             }
         }
 
-        for (int j : area) {
-            perim += addAtIx(j);
-        }
-
-        return new Region(area.stream().mapToInt(Integer::intValue).toArray(), perim);
+        return area.stream().mapToInt(Integer::intValue).toArray();
     }
 }

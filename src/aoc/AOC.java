@@ -17,7 +17,7 @@ import static aoc.Util.putln;
 public class AOC {
     private final static String aocURL = "https://adventofcode.com/20%d/day/%d/input";
 
-    private final static Set<Integer> aocAR = Set.of(24);
+    private final static Set<Integer> aocAR = Set.of(24, 25);
 
     static String arFmt() {
         return String.join(", ", aocAR.stream()

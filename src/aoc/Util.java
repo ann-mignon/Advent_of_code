@@ -21,6 +21,15 @@ public class Util {
         return Arrays.stream(strings).mapToInt(Integer::valueOf).toArray();
     }
 
+    public static int indexOfIntArray(int[] array, int value) {
+        int i = 0;
+        for (int v : array) {
+            if(v == value) return i;
+            ++i;
+        }
+        return -1;
+    }
+
     public static IntStream toIntStream(String[] strings) {
         return Arrays.stream(strings).mapToInt(Integer::valueOf);
     }

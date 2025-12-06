@@ -1,25 +1,37 @@
 package aoc.misc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static aoc.Util.splitta;
+import static aoc.Util.splitta_notrim;
 
 public class CharGrid {
-    private final char[][] _grid;
+    private char[][] _grid;
+    public static char NO_CHAR = '©';
 
-    public final int hojd;
-    public final int bredd;
-    public final int tot;
+    public int hojd;
+    public int bredd;
+    public int tot;
 
-    public CharGrid(String txt) {
-        _grid = Arrays.stream(splitta(txt, "\n"))
-                .map(String::toCharArray).toArray(char[][]::new);
-
+    private void recalc() {
         hojd = _grid.length;
         bredd = _grid[0].length;
         tot = hojd * bredd;
+    }
+    
+    public CharGrid(String txt) {
+        _grid = Arrays.stream(splitta_notrim(txt, "\n"))
+                .map(String::toCharArray).toArray(char[][]::new);
+
+        recalc();
+    }
+    
+    public CharGrid(char[][] grid) {
+        _grid = grid;
+        recalc();
     }
 
     public Character getCharAt(Point p) {
@@ -32,7 +44,11 @@ public class CharGrid {
     }
 
     public Character getCharAt(int p) {
-        return _grid[p/bredd][p % bredd];
+        try {
+            return _grid[p / bredd][p % bredd];
+        } catch (ArrayIndexOutOfBoundsException x) {
+            return NO_CHAR;
+        }
     }
 
     public char[] getGridLine(int i) {
@@ -62,7 +78,21 @@ public class CharGrid {
                 .collect(Collectors.joining()).indexOf(c);
 
         if (ix == -1) return null;
-        return new Point(ix % bredd, ix / hojd);
+        return new Point(ix % bredd, ix / bredd);
+    }
+    
+    public Point[] findAll(char c) {
+        List<Point> all = new ArrayList<>();
+        
+        for (int i = 0; i < hojd; ++i) {
+            for (int j = 0; j < bredd; ++j) {
+                if(_grid[i][j] == c) {
+                    all.add(new Point(j, i));
+                }
+            }
+        }
+        
+        return all.toArray(Point[]::new);
     }
 
     public IntStream flatStream() {
@@ -76,5 +106,20 @@ public class CharGrid {
 
     public String toString() {
         return Arrays.stream(_grid).map(ca -> new String(ca) + "\n").collect(Collectors.joining());
+    }
+    
+    public void rot90() {
+        int nw = this.hojd, nh = this.bredd;
+        
+        char[][] roterad = new char[nh][nw];
+                
+        for (int y = 0; y < nh; ++y) {
+            for (int x = 0; x < nw; ++x) {
+                roterad[y][x] = _grid[x][y];
+            }
+        }
+        
+        this._grid = roterad;
+        recalc();
     }
 }

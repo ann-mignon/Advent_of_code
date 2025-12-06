@@ -17,8 +17,40 @@ public class Util {
         return ut.toArray(new String[0]);
     }
 
+    public static String[] splitta_notrim(String str, String delim) {
+        List<String> ut = Arrays.stream(str.split(delim)).toList();
+        return ut.toArray(new String[0]);
+    }
+
     public static int[] toIntArray(String[] strings) {
         return Arrays.stream(strings).mapToInt(Integer::valueOf).toArray();
+    }
+    
+    public static String strFromCodeStream(IntStream charsI) {
+        return new String(charsI.mapToObj(Character::toString)
+                .collect(Collectors.joining())
+                .toCharArray());
+    }
+
+    public static String strFromCodes(int[] chars) {
+        return new String(toCharArray(chars));
+    }
+
+    public static char[] toCharArray(int[] charsI) {
+        return strFromCodeStream(IntStream.of(charsI)).toCharArray();
+    }
+
+    public static char[] toCharArray(Character[] charBox) {
+        return toCharArray(Arrays.stream(charBox).mapToInt(c -> c.charValue()).toArray());
+    }
+
+    public static int[] reverseIntArray(int[] array) {
+        int[] rev = new int[array.length];
+        int j = array.length;
+        while (j-- > 0) {
+            rev[j] = array[array.length - j - 1];
+        }
+        return rev;
     }
 
     public static int indexOfIntArray(int[] array, int value) {

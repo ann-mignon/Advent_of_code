@@ -22,4 +22,8 @@ public class PointL {
     public PointL add (PointL p) { // factory
         return new PointL(x + p.x, y + p.y);
     }
+
+    public long manhattan (PointL p) {
+        return Math.abs(this.x - p.x) + Math.abs(this.y - p.y);
+    }
 }

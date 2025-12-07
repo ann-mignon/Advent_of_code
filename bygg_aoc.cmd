@@ -15,7 +15,7 @@ if [%java.home%]==[] (
 )
 
 if [%src.dir%]==[] (
-	set src.dir=.\src
+	set src.dir=.\src\aoc
 )
 
 if [%build.dir%]==[] (
@@ -27,6 +27,6 @@ if [%build.dir%]==[] (
 
 echo Bygger Anns JDK-advent till %build.dir%
 
-@dir /B /S /A-D "%src.dir%\*.java" > .\sources.txt && "%java.home%\bin\javac" -d %build.dir% -cp %build.dir% -sourcepath %src.dir% @sources.txt 2> nul
+dir /B /S /A-D "%src.dir%\*.java" > .\sources.txt && "%java.home%\bin\javac" -d %build.dir% -cp %build.dir% -sourcepath %src.dir% @sources.txt 2> nul
 
 :end

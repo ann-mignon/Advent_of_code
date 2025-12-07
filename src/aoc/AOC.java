@@ -33,7 +33,7 @@ public class AOC {
                 int iAr = Integer.parseInt(args[0]);
 
                 if (!aocAR.contains(iAr)) {
-                    throw new RuntimeException(String.format("Fel år: %s tillgängliga", arFmt()));
+                    throw new RuntimeException(String.format("Fel år: %s tillgängliga (%s angivet)", arFmt(), args[0]));
                 }
 
                 Matcher dpmc = Pattern.compile("(\\d{1,2})([a-z]+)?").matcher(args[1]);

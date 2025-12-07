@@ -14,7 +14,7 @@ else
 fi
 
 if [ -z "$2" ]; then
-	src_dir=./src
+	src_dir=./src/aoc
 else 
 	src_dir=$2
 fi

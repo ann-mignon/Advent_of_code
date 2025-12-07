@@ -1,11 +1,17 @@
 @echo off
 @chcp 1252 > nul
 
-set lucka=%1
-set infil=%2
-set build.dir=%3
-set src.dir=%4
-set java.home=%5
+set aar=%1
+set lucka=%2
+set infil=%3
+set build.dir=%4
+set src.dir=%5
+set java.home=%6
+
+if [%aar%]==[] (
+	echo "Ange år (tvåsiffrigt)."
+	goto end
+)
 
 if [%lucka%]==[] (
 	echo Ange en lucka.
@@ -27,13 +33,13 @@ if [%src.dir%]==[] (
 
 if [%build.dir%]==[] (
 	if not exist ".\build\" (
-		echo Hittar inget bygge, har du provat bygg_aoc24.cmd?
+		echo Inget under \build
 		goto end
 	) else (
 		set build.dir=.\build\
 	)
 )
 
-%java.home%/bin/java -cp %build.dir%;%src.dir%\aoc24\res\ aoc24.AOC %lucka% %infil%
+%java.home%/bin/java -cp %build.dir%;%src.dir%\aoc\res\ aoc.AOC %aar% %lucka% %infil%
 
 :end

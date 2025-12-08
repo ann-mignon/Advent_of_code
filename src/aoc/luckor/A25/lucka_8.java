@@ -34,7 +34,7 @@ public class lucka_8 extends Losning {
             .findFirst().orElse(null);
     }
 
-    int plugga(int parix) {
+    void plugga(int parix) {
         int jb1 = boxA[parix], jb2 = boxB[parix];
 
         Set<Integer> krets, kretsA = kByJ(jb1),
@@ -51,7 +51,6 @@ public class lucka_8 extends Losning {
                 krets.addAll(Set.of(jb1, jb2));
             }
         }
-        return 1;
     }
 
     protected void sortera() {
@@ -87,7 +86,7 @@ public class lucka_8 extends Losning {
     public String svar() {
         sortera();
         int i = 0;
-        while (plug > 0) plug -= plugga(bparX[i++]);
+        while (i < plug) plugga(bparX[i++]);
 
         kretsar = kretsar.stream().sorted(Comparator.comparingInt(Set::size)).toList().reversed();
 

@@ -109,7 +109,7 @@ public class Util {
      * <code>Long.stringSize</code> method found in OpenJDK 8 source.
      * For anyone curious about this, an evolved version of it is found
      * in the OpenJDK codebase, link below.
-     * @see <a href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/jdk/internal/util/DecimalDigits.java#L125">DecimalDigits.java @ Github</a>
+     * @see <a href="https://github.com/openjdk/jdk/blob/jdk-27%2B19/src/java.base/share/classes/jdk/internal/util/DecimalDigits.java#L123-L136">DecimalDigits.java @ Github</a>
      * </p>
      * @param n long value (only positive integers)
      * @return int decimals
